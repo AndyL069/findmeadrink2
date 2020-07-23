@@ -20,9 +20,15 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="9*" />
+                <RowDefinition Height="8*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
+            <maps:Map x:Name="CityMap" Grid.Row="0"></maps:Map>
+            <Label x:Name="ResultLabel" Grid.Row="1" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center"></Label>
+            <Button CornerRadius="50" Grid.Row="2" FontAttributes="Bold" Clicked="FindADrink" TextColor="White" BackgroundColor="#FF1D7A88" Text="FIND ME A DRINK"></Button>
+            <Button x:Name="RouteButton" IsVisible="False" CornerRadius="50" Grid.Row="3" FontAttributes="Bold" Clicked="RouteToBar" TextColor="White" BackgroundColor="#FFEC8074" Text="GET ME THERE"></Button>
         </Grid>
     </StackLayout>
 </ContentPage>

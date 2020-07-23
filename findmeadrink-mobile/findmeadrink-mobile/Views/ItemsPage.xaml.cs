@@ -3,9 +3,9 @@ using Xamarin.Forms;
 using findmeadrink_mobile.ViewModels;
 using Xamarin.Forms.Maps;
 using Xamarin.Essentials;
-using Map = Xamarin.Forms.Maps.Map;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System;
 
 namespace findmeadrink_mobile.Views
 {
@@ -16,7 +16,8 @@ namespace findmeadrink_mobile.Views
     {
         ItemsViewModel viewModel;
         Xamarin.Essentials.Location location;
-        Map map;
+        string barName;
+
         public ItemsPage()
         {
             InitializeComponent();
@@ -27,42 +28,47 @@ namespace findmeadrink_mobile.Views
         async void OnStartup()
         {
             var request = new GeolocationRequest(GeolocationAccuracy.Best);
-            var location = await Geolocation.GetLocationAsync(request);
+            location = await Geolocation.GetLocationAsync(request);
             //location = new Xamarin.Essentials.Location(50.1118331, 8.6608024);
             Position position = new Position(location.Latitude, location.Longitude);
             MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
-            map = new Map(mapSpan);
-            MainGrid.Children.Add(map, 0, 0);
-            Button button = new Button
-            {
-                BackgroundColor = Color.FromHex("FF1D7A88"),
-                Text = "Find me a drink",
-                TextColor = Color.White,
-                Command = new Command(FindADrink)
-            };
-            MainGrid.Children.Add(button, 0, 1);
+            CityMap.MoveToRegion(mapSpan);
         }
 
-        async void FindADrink()
+        private async void FindADrink(object sender, EventArgs e)
         {
             HttpClient httpClient = new HttpClient();
             string baseUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=";
-            //string location = "50.1204088,8.6649881";
             string apiKey = "AIzaSyAaofiKriE1N3bPDVHyp_Jy5GuhVX55bho";
             var result = await httpClient.GetAsync(baseUrl + location.Latitude + "," + location.Longitude + "&radius=1000&type=bar&key=" + apiKey);
             var responseString = await result.Content.ReadAsStringAsync();
             var responseObject = JsonConvert.DeserializeObject<Example>(responseString);
+            Random random = new Random();
+            var randomNumber = random.Next(0, responseObject.results.Count - 1);
+            location = new Xamarin.Essentials.Location(responseObject.results[randomNumber].geometry.location.lat, responseObject.results[randomNumber].geometry.location.lng);
+            Position position = new Position(location.Latitude, location.Longitude);
+            barName = responseObject.results[randomNumber].name;
+            MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
             Pin pin = new Pin
             {
-                Label = responseObject.results[0].name,
-                Address = "",
+                Label = barName,
+                Address = responseObject.results[randomNumber].vicinity,
                 Type = PinType.Place,
-                Position = new Position(responseObject.results[0].geometry.location.lat, responseObject.results[0].geometry.location.lng)
+                Position = position
             };
-            Position position = new Position(responseObject.results[0].geometry.location.lat, responseObject.results[0].geometry.location.lng);
-            MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
-            map = new Map(mapSpan);
-            map.Pins.Add(pin);
+            
+            CityMap.MoveToRegion(mapSpan);         
+            ResultLabel.Text = "YOUR NEXT DRINK IS AT: " + barName;
+            CityMap.Pins.Clear();
+            CityMap.Pins.Add(pin);
+            RouteButton.IsVisible = true;
+        }
+
+        private async void RouteToBar(object sender, EventArgs e)
+        {
+            var location = new Xamarin.Essentials.Location(50.1271753, 8.6660032);
+            var options = new MapLaunchOptions { Name = barName };
+            await Xamarin.Essentials.Map.OpenAsync(location, options);
         }
     }
 
