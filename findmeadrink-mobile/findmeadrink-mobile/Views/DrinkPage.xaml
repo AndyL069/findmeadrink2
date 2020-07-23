@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps" xmlns:vm="clr-namespace:findmeadrink_mobile.ViewModels"
              mc:Ignorable="d"
-             x:Class="findmeadrink_mobile.Views.ItemsPage"
+             x:Class="findmeadrink_mobile.Views.DrinkPage"
              Title="{Binding Title}"
              x:Name="BrowseItemsPage">
     <Shell.TitleView>

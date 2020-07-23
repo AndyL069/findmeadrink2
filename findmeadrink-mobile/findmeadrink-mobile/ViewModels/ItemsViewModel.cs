@@ -17,7 +17,7 @@ using Map = Xamarin.Forms.Maps.Map;
 
 namespace findmeadrink_mobile.ViewModels
 {
-    public class ItemsViewModel : BaseViewModel
+    public class DrinkViewModel : BaseViewModel
     {
         public ObservableCollection<Item> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
@@ -29,7 +29,7 @@ namespace findmeadrink_mobile.ViewModels
         public Map Map { get; set; }
 
 
-        public ItemsViewModel()
+        public DrinkViewModel()
         {
             Title = "Browse";
             FindDrinkCommand = new Command(FindMeADrink);
@@ -58,7 +58,7 @@ namespace findmeadrink_mobile.ViewModels
             string apiKey = "AIzaSyAaofiKriE1N3bPDVHyp_Jy5GuhVX55bho";
             var result = await httpClient.GetAsync(baseUrl + Location.Latitude + "," + Location.Longitude + "&radius=1000&type=bar&key=" + apiKey);
             var responseString = await result.Content.ReadAsStringAsync();
-            var responseObject = JsonConvert.DeserializeObject<Example>(responseString);
+            var responseObject = JsonConvert.DeserializeObject<LocationsResponse>(responseString);
         }
     }
 
@@ -131,7 +131,7 @@ namespace findmeadrink_mobile.ViewModels
         public string vicinity { get; set; }
     }
 
-    public class Example
+    public class LocationsResponse
     {
         public IList<object> html_attributions { get; set; }
         public string next_page_token { get; set; }
