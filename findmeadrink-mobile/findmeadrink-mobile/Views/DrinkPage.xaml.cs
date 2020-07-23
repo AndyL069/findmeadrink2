@@ -9,8 +9,6 @@ using System;
 using Pin = Xamarin.Forms.Maps.Pin;
 using Microsoft.AppCenter.Crashes;
 using System.Threading.Tasks;
-using Xamarin.Android.Net;
-using System.Linq;
 
 namespace findmeadrink_mobile.Views
 {
@@ -26,7 +24,7 @@ namespace findmeadrink_mobile.Views
 
         public DrinkPage()
         {
-            httpClient = new HttpClient(new AndroidClientHandler());
+            httpClient = new HttpClient();
             InitializeComponent();
             BindingContext = viewModel = new DrinkViewModel();
             OnStartup();
@@ -36,7 +34,6 @@ namespace findmeadrink_mobile.Views
         {
             var request = new GeolocationRequest(GeolocationAccuracy.Best);
             location = await Geolocation.GetLocationAsync(request);
-            //location = new Xamarin.Essentials.Location(50.1118331, 8.6608024);
             Position position = new Position(location.Latitude, location.Longitude);
             MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
             CityMap.MoveToRegion(mapSpan);
@@ -51,11 +48,9 @@ namespace findmeadrink_mobile.Views
                 var randomNumber = random.Next(0, responseObject.results.Count - 1);
                 if (responseObject.results.Count > 0)
                 {
-                    //location = new Xamarin.Essentials.Location(50.1118331, 8.6608024);
                     location = new Xamarin.Essentials.Location(responseObject.results[randomNumber].geometry.location.lat, responseObject.results[randomNumber].geometry.location.lng);
                     Position position = new Position(location.Latitude, location.Longitude);
                     barName = responseObject.results[randomNumber].name;
-                    //barName = "Bar ohne Namen";
                     MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
                     Pin pin = new Pin
                     {
@@ -102,7 +97,6 @@ namespace findmeadrink_mobile.Views
                 string lat = location.Latitude.ToString().Replace(',', '.');
                 string lng = location.Longitude.ToString().Replace(',', '.');
                 string query = baseUrl + lat + "," + lng + "&radius=1000&type=bar&key=" + apiKey;
-                //await Application.Current.MainPage.DisplayAlert("Query", query, "Dismiss");
                 response = await httpClient.GetAsync(query);
                 if (response.IsSuccessStatusCode)
                 {
