@@ -93,7 +93,7 @@ namespace findmeadrink_mobile.Views
             try
             {
                 string baseUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=";
-                string apiKey = "AIzaSyAaofiKriE1N3bPDVHyp_Jy5GuhVX55bho";
+                string apiKey = "{API_KEY}";
                 string lat = location.Latitude.ToString().Replace(',', '.');
                 string lng = location.Longitude.ToString().Replace(',', '.');
                 string query = baseUrl + lat + "," + lng + "&radius=1000&type=bar&key=" + apiKey;

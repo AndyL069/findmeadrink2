@@ -22,7 +22,7 @@ namespace findmeadrink_mobile
 
         protected override void OnStart()
         {
-            AppCenter.Start("6120d7d4-dc90-479c-8a19-fad2d704f219",
+            AppCenter.Start("{APP_CENTER_ID}",
                                typeof(Analytics), typeof(Crashes));
         }
 
