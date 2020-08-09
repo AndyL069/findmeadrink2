@@ -37,7 +37,7 @@ namespace findmeadrink_mobile.Views
         {
             HttpClient httpClient = new HttpClient();
             string baseUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=";
-            string apiKey = "AIzaSyAaofiKriE1N3bPDVHyp_Jy5GuhVX55bho";
+            string apiKey = "{API_KEY}";
             var result = await httpClient.GetAsync(baseUrl + location.Latitude + "," + location.Longitude + "&radius=1000&type=bar&key=" + apiKey);
             var responseString = await result.Content.ReadAsStringAsync();
             var responseObject = JsonConvert.DeserializeObject<RouteModel>(responseString);
