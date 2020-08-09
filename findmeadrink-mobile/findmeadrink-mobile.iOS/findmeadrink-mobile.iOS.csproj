@@ -61,7 +61,6 @@
     <MtouchArch>ARM64</MtouchArch>
     <CodesignKey>iPhone Developer</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <MtouchLink>None</MtouchLink>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -142,5 +141,8 @@
       <Project>{5497828D-458B-422D-9E62-788E17AC9FBF}</Project>
       <Name>findmeadrink-mobile</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\findmeadrink.png" />
   </ItemGroup>
 </Project>

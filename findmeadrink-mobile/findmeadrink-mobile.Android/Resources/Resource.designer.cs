@@ -11248,19 +11248,10 @@ namespace findmeadrink_mobile.Droid
 			public const int notify_panel_notification_icon_bg = 2131165321;
 			
 			// aapt resource value: 0x7F07008A
-			public const int tab_about = 2131165322;
+			public const int tooltip_frame_dark = 2131165322;
 			
 			// aapt resource value: 0x7F07008B
-			public const int tab_feed = 2131165323;
-			
-			// aapt resource value: 0x7F07008C
-			public const int tooltip_frame_dark = 2131165324;
-			
-			// aapt resource value: 0x7F07008D
-			public const int tooltip_frame_light = 2131165325;
-			
-			// aapt resource value: 0x7F07008E
-			public const int xamarin_logo = 2131165326;
+			public const int tooltip_frame_light = 2131165323;
 			
 			static Drawable()
 			{

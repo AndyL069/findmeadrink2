@@ -2,19 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.findmeadrink_mobile">
     <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="28" />
     <application android:label="findmeadrink_mobile.Android">
-      <meta-data android:name="com.google.android.geo.API_KEY" android:value="{API_KEY}" />
+      <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyAaofiKriE1N3bPDVHyp_Jy5GuhVX55bho" />
       <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
-      <!-- Necessary for apps that target Android 9.0 or higher -->
-      <uses-library android:name="org.apache.http.legacy" android:required="false" />
     </application>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
 </manifest>
